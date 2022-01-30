@@ -15,6 +15,8 @@
 
 (setq initial-frame-alist '((fullscreen . maximized)))
 
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 (column-number-mode)
 (global-display-line-numbers-mode t)
 (setq-default display-fill-column-indicator-column 79)
@@ -100,3 +102,13 @@
 
 (use-package treemacs-magit
   :after (treemacs magit))
+
+(use-package lsp-mode
+  :init
+    (setq lsp-keymap-prefix "C-c l")
+  :hook
+    (lsp-mode . lsp-enable-which-key-integration)
+  :commands
+    lsp)
+
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)

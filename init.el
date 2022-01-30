@@ -13,6 +13,8 @@
 
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 95)
 
+(setq initial-frame-alist '((fullscreen . maximized)))
+
 (column-number-mode)
 (global-display-line-numbers-mode t)
 (setq-default display-fill-column-indicator-column 79)
@@ -44,6 +46,11 @@
 ;; S-<up, down, right, left>
 (windmove-default-keybindings)
 
+(tab-bar-mode)
+(tab-bar-history-mode)
+(global-set-key (kbd "M-[") 'tab-bar-history-back)
+(global-set-key (kbd "M-]") 'tab-bar-history-forward)
+
 
 ;; straight.el
 (defvar bootstrap-version)
@@ -74,4 +81,13 @@
   :config
     (counsel-mode t))
 
-(use-package vterm)
+(use-package vterm
+  :config
+    (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode 0))))
+
+(use-package which-key
+  :config
+    (setq which-key-idle-delay 0.1)
+    (which-key-mode))
+
+(use-package magit)

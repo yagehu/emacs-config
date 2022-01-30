@@ -40,6 +40,10 @@
                                                          #'launch-separate-emacs-in-terminal)))))
     (save-buffers-kill-emacs)))
 
+;; Directional window selection
+;; S-<up, down, right, left>
+(windmove-default-keybindings)
+
 
 ;; straight.el
 (defvar bootstrap-version)
@@ -69,3 +73,5 @@
 (use-package counsel
   :config
     (counsel-mode t))
+
+(use-package vterm)

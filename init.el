@@ -68,6 +68,7 @@
 
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
+(setq use-package-always-ensure t)
 
 (use-package doom-themes
   :config
@@ -91,3 +92,11 @@
     (which-key-mode))
 
 (use-package magit)
+
+(use-package treemacs
+  :defer t
+  :config
+    (add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode 0))))
+
+(use-package treemacs-magit
+  :after (treemacs magit))

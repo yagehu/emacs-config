@@ -1,4 +1,5 @@
 *~
+.cache
 elpa
 session.*
 straight

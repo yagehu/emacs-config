@@ -85,8 +85,8 @@
     (counsel-mode t))
 
 (use-package vterm
-  :config
-    (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode 0))))
+  :hook
+    (vterm-mode . (lambda () (display-line-numbers-mode 0))))
 
 (use-package which-key
   :config
@@ -97,8 +97,8 @@
 
 (use-package treemacs
   :defer t
-  :config
-    (add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode 0))))
+  :hook
+    (treemacs-mode . (lambda () (display-line-numbers-mode 0))))
 
 (use-package treemacs-magit
   :after (treemacs magit))
@@ -112,3 +112,12 @@
     lsp)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+
+(use-package rustic
+  :defer t
+  :config
+    ;; Don't display rustfmt buffer.
+    (setq rustic-format-display-method 'ignore)
+    (setq rustic-format-on-save t)
+    (setq rustic-lsp-server 'rust-analyzer)
+    (setq rustic-rustfmt-args "+nightly"))

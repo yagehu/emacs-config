@@ -1,6 +1,8 @@
 *~
 .cache
+.lsp-session-v1
 auto-save-list
+bookmarks
 elpa
 session.*
 straight

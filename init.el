@@ -89,14 +89,15 @@
     (vterm-mode . (lambda () (display-line-numbers-mode 0))))
 
 (use-package which-key
+  :init
+    (setq which-key-idle-delay 0.5)
   :config
-    (setq which-key-idle-delay 0.1)
     (which-key-mode))
 
 (use-package magit)
 
 (use-package treemacs
-  :defer t
+  :commands treemacs
   :hook
     (treemacs-mode . (lambda () (display-line-numbers-mode 0))))
 
@@ -106,18 +107,36 @@
 (use-package lsp-mode
   :init
     (setq lsp-keymap-prefix "C-c l")
+    (setq lsp-signature-render-documentation nil)
   :hook
-    (lsp-mode . lsp-enable-which-key-integration)
+    ((lsp-mode . lsp-enable-which-key-integration))
   :commands
     lsp)
 
+(use-package lsp-ui :commands lsp-ui-mode)
+
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+
+(use-package lsp-treemacs
+  :after (lsp-mode treemacs)
+  :config (lsp-treemacs-sync-mode 1))
+
+(use-package flycheck
+  :config (global-flycheck-mode))
+
+(use-package company
+  :init
+    (setq company-minimum-prefix-length 1)
+    (setq company-idle-delay 0.0)
+    (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package rustic
   :defer t
-  :config
+  :init
     ;; Don't display rustfmt buffer.
     (setq rustic-format-display-method 'ignore)
     (setq rustic-format-on-save t)
     (setq rustic-lsp-server 'rust-analyzer)
-    (setq rustic-rustfmt-args "+nightly"))
+    (setq rustic-rustfmt-args "+nightly")
+    (setq lsp-rust-analyzer-server-display-inlay-hints t)
+    (setq lsp-rust-analyzer-proc-macro-enable t))

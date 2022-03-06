@@ -11,6 +11,8 @@
   tab-mark))
 (global-whitespace-mode)
 
+(global-auto-revert-mode t)
+
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 95)
 
 (setq initial-frame-alist '((fullscreen . maximized)))
@@ -86,7 +88,9 @@
 
 (use-package counsel
   :config
-    (counsel-mode t))
+    (counsel-mode t)
+  :bind
+    (("C-x b" . counsel-switch-buffer)))
 
 (use-package vterm
   :hook
@@ -141,6 +145,10 @@
     (setq rustic-format-display-method 'ignore)
     (setq rustic-format-on-save t)
     (setq rustic-lsp-server 'rust-analyzer)
-    (setq rustic-rustfmt-args "+nightly")
+    (setq rustic-rustfmt-args "--unstable-features")
     (setq lsp-rust-analyzer-server-display-inlay-hints t)
     (setq lsp-rust-analyzer-proc-macro-enable t))
+
+(use-package fzf
+  :bind
+    (("C-c C-f C-g" . fzf-git)))

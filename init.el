@@ -54,11 +54,6 @@
 ;; S-<up, down, right, left>
 (windmove-default-keybindings)
 
-(tab-bar-mode)
-(tab-bar-history-mode)
-(global-set-key (kbd "M-[") 'tab-bar-history-back)
-(global-set-key (kbd "M-]") 'tab-bar-history-forward)
-
 
 ;; straight.el
 (defvar bootstrap-version)
@@ -117,7 +112,8 @@
     (setq lsp-keymap-prefix "C-c l")
     (setq lsp-signature-render-documentation nil)
   :hook
-    ((lsp-mode . lsp-enable-which-key-integration))
+    ((yaml-mode . lsp)
+     (lsp-mode . lsp-enable-which-key-integration))
   :commands
     lsp)
 
@@ -148,6 +144,8 @@
     (setq rustic-rustfmt-args "--unstable-features")
     (setq lsp-rust-analyzer-server-display-inlay-hints t)
     (setq lsp-rust-analyzer-proc-macro-enable t))
+
+(use-package yaml-mode)
 
 (use-package fzf
   :bind
